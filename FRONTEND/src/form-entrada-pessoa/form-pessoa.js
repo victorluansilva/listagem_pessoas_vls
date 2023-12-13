@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 
 import "./form-pessoa.style.css";
 
-const FormPessoa = ({ pessoa, setPessoa }) => {
+const FormPessoa = ({current, insertPessoa }) => {
+  const [pessoa, setPessoa] = useState({});
+  
+  const submit = (e) =>{
+    e.preventDefault();
+    console.log(pessoa)
+    insertPessoa(pessoa);
+  }
 
   return (
     <div id="componentes_form">
@@ -34,7 +41,7 @@ const FormPessoa = ({ pessoa, setPessoa }) => {
         }}
       />
 
-      <Button type="submit" variant="outlined" onClick={console.log(pessoa)}>
+      <Button type="submit" variant="outlined" onClick={submit}>
         Botão
       </Button>
     </div>

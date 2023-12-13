@@ -5,30 +5,29 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Titulo from "./titulo/titulo";
 import TablePessoa from "./table-lista-pessoas/table-pessoa";
 import { useEffect, useState } from "react";
-import getPessoas from "./api/pessoa.service";
+import {apiGetPessoas, apiAddPessoa} from "./api/pessoa.service";
 
 function App() {
   const [dados, setDados] = useState([{}]);
-  const [pessoa, setPessoa] = useState({
-    nome: "",
-    sobrenome: "",
-    idade: 0,
-  });
+  const [current, setCurrent] = useState({nome:null,sobrenome:null,idade:null})
 
   useEffect(() => {
     fetchPessoas();
   }, []);
 
   const fetchPessoas = async () => {
-    const resultado = await getPessoas();
+    const resultado = await apiGetPessoas();
     setDados(resultado);
   };
 
+  const handleAddPessoa = async (novoDado) =>{
+    await apiAddPessoa(novoDado)
+  }
   
 
   return (
     <div className="App">
-      <FormPessoa pessoa={pessoa} setPessoa={setPessoa} />
+      <FormPessoa pessoa={current} insertPessoa={handleAddPessoa} />
       <TablePessoa pessoas={dados} />
     </div>
   );
