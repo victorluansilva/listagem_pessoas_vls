@@ -5,7 +5,7 @@ const apiGetPessoas = async () => {
     const resposta = await fetch(`${URL_API}/pessoa`);
 
     if (!resposta.ok) {
-      throw new Error("Falha na requisção");
+      throw new Error("Falha na requisição");
     }
 
     return await resposta.json();

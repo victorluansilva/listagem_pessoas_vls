@@ -1,9 +1,11 @@
+//Imports de Componentes
+// import Titulo from "./titulo/titulo";
 import FormPessoa from "./form-entrada-pessoa/form-pessoa";
+import TablePessoa from "./table-lista-pessoas/table-pessoa";
 //Etilos CSS
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Titulo from "./titulo/titulo";
-import TablePessoa from "./table-lista-pessoas/table-pessoa";
+//Outros imports
 import { useEffect, useState } from "react";
 import {apiGetPessoas, apiAddPessoa} from "./api/pessoa.service";
 
