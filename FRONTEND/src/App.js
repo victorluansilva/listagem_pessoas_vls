@@ -11,22 +11,24 @@ import {apiGetPessoas, apiAddPessoa} from "./api/pessoa.service";
 
 function App() {
   const [dados, setDados] = useState([{}]);
+  const [onAction, setAction] = useState(false);
   const [current, setCurrent] = useState({nome:null,sobrenome:null,idade:null})
 
   useEffect(() => {
     fetchPessoas();
-  }, []);
+  }, [onAction]);
 
   const fetchPessoas = async () => {
     const resultado = await apiGetPessoas();
     setDados(resultado);
+    setAction(false)
   };
 
   const handleAddPessoa = async (novoDado) =>{
     await apiAddPessoa(novoDado)
+    setAction(!onAction)
   }
   
-
   return (
     <div className="App">
       <FormPessoa pessoa={current} insertPessoa={handleAddPessoa} />
