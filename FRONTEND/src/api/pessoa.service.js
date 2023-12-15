@@ -25,7 +25,7 @@ const apiAddPessoa = async (novaPessoa) => {
     });
 
     if (!res.ok) {
-        throw new Error('Houve erro na adição do usuário')
+      throw new Error('Houve erro na adição do usuário')
     }
 
     const result = await res.json();
@@ -36,4 +36,60 @@ const apiAddPessoa = async (novaPessoa) => {
   }
 };
 
-export {apiAddPessoa, apiGetPessoas};
+const apiUpdatePessoa = async (pessoaEdit) => {
+  try {
+    const res = await fetch(`${URL_API}/pessoa/atualizar`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(pessoaEdit),
+    });
+
+    if (!res.ok) {
+      throw new Error('Houve erro na atualização da pessoa')
+    }
+
+    const result = await res.json();
+    return result;
+
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
+const apiDeletePessoa = async (id) => {
+  try {
+    const res = await fetch(`${URL_API}/pessoa/deletar/${id}`, {
+      method: 'DELETE'
+    });
+
+    if (!res.ok) {
+      throw new Error('Houve erro na atualização da pessoa')
+    }
+
+    const result = await res.json();
+    return result;
+
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
+const apiGetPessoaById = async (id) =>{
+  try {
+    const res = await fetch(`${URL_API}/pessoa/${id}`);
+
+    if (!res.ok) {
+      throw new Error('Houve erro na atualização da pessoa')
+    }
+
+    const result = await res.json();
+    return result;
+
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
+export { apiAddPessoa, apiGetPessoas, apiGetPessoaById, apiUpdatePessoa, apiDeletePessoa };

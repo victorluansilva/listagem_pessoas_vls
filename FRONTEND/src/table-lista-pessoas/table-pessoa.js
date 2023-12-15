@@ -1,4 +1,4 @@
-const TablePessoa = ({ pessoas }) => {
+const TablePessoa = ({ pessoas, handleEdit }) => {
   return (
     <div className="m-5">
       <table className="table">
@@ -12,7 +12,8 @@ const TablePessoa = ({ pessoas }) => {
         </thead>
         <tbody>
           {pessoas.map((pessoa, index) => (
-            <tr key={index}  >
+            <tr key={index} onClick={(e) =>{handleEdit(e, index, pessoa)}}
+            onContextMenu={(e) =>{handleEdit(e, index, pessoa)}} >
               <th scope="row">
                 {index+1}
               </th>
