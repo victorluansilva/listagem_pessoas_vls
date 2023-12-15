@@ -20,15 +20,23 @@ exports.inserirPessoa = async (req, res) => {
 };
 
 exports.atualizarPessoa = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params; 
+  const { nome, idade } = req.body; 
+  console.log(req.params, req.body)
   try {
-    const result = await Pessoa.update(
-      { title: 'a very different title now' },
-      { where: { _id: 1 } }
-    )
-    handleResult(result)
-  } catch (err) {
-    handleError(err)
+    const updatedPerson = await Pessoa.findByIdAndUpdate(
+      id, 
+      { nome, idade }, 
+      { new: true } 
+    );
+
+    if (!updatedPerson) {
+      return res.status(404).json({ message: 'Person not found' });
+    }
+
+    res.status(200).json(updatedPerson);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -64,17 +72,17 @@ exports.buscarPessoaById = async (req, res) => {
 }
 
 exports.buscarPessoaByIDorSobrenome = async (req, res) => {
-  const { id, sobrenome } = req.query; // Captura os parâmetros de busca (query params)
+  const { id, sobrenome } = req.query; 
 
   try {
     let people;
 
     if (id) {
-      people = await Pessoa.find({ _id: id }); // Busca por ID
+      people = await Pessoa.find({ _id: id }); 
     } else if (sobrenome) {
-      people = await Pessoa.find({ sobrenome }); // Busca por sobrenome
+      people = await Pessoa.find({ sobrenome }); 
     } else {
-      people = await Pessoa.find(); // Busca todas as pessoas caso nenhum parâmetro seja fornecido
+      people = await Pessoa.find(); 
     }
 
     if (!people || people.length === 0) {
