@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 
 import "./form-pessoa.style.css";
 
-const FormPessoa = ({onSelected, handleSubmit, resetSelected }) => {
+const FormPessoa = ({onSelected, handleSubmit, setSelected }) => {
   const [pessoa, setPessoa] = useState({});
   
   useEffect(() => {
@@ -14,12 +14,8 @@ const FormPessoa = ({onSelected, handleSubmit, resetSelected }) => {
 
   const submit = (e) =>{
     e.preventDefault();
-    console.log(pessoa)
-    handleSubmit(pessoa).then((result) =>{
-      if (result){
-        resetSelected();
-      }
-    })
+    handleSubmit(pessoa);
+    setSelected({})
   }
 
   return (
