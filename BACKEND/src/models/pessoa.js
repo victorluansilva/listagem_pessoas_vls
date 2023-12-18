@@ -11,17 +11,18 @@ const Pessoa = mySQLcon.config.define(
     },
     nome: {
       type: mySQLcon.dataTypes.STRING,
-      allowNull: false,
+      // allowNull: false,
     },
     sobrenome: {
       type: mySQLcon.dataTypes.STRING,
     },
     idade: {
       type: mySQLcon.dataTypes.INTEGER,
-      allowNull: false,
+      // allowNull: false,
     },
   },
   {
+    freezeTableName: true,
     timestamps: false,
     tableName: "pessoa",
   }

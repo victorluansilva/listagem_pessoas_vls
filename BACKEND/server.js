@@ -3,15 +3,16 @@ const cors = require("cors");
 const dotenv = require("dotenv").config();
 
 const server = express();
-server.use(cors());
 server.use(express.json());
+server.use(express.urlencoded({ extended: true })); 
+server.use(cors());
 
-const pessoaRoutes = require("./src/routes/pessoaRoutes");
+const pessoaRoutes = require("./src/routes/pessoa.routes");
 
 server.use("/api/pessoa", pessoaRoutes);
 // server.use("/api/record", recordRoutes);
 
-const PORT = process.env.PORT | 7000;
+const PORT = process.env.PORT || 7000;
 
 server.get('/',(req,res)=>{
   res.send(`API DO PROJETO LISTAGEM DE PESSOAS`)

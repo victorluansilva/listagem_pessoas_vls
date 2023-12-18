@@ -11,7 +11,7 @@ import { apiGetPessoas, apiAddPessoa, apiGetPessoaById, apiUpdatePessoa, apiDele
 
 function App() {
 
-  const NULLPESSOA = { id: null, nome: null, sobrenome: null, idade: null }
+  const NULLPESSOA = { id: null, nome: "", sobrenome: "", idade: null }
 
   const [dados, setDados] = useState([{}]);
   const [onAction, setAction] = useState(false);
@@ -61,7 +61,7 @@ function App() {
     console.log(e, index, pessoa)
     if (e.type === "click") {
       const confirmarEdicao = window.confirm(
-        `Clicou com o botão esquerdo, e o ${pessoa.nome.toUpperCase()} será carregado para edição`
+        `Clicou com o botão esquerdo, e o ${pessoa.nome?.toUpperCase()} será carregado para edição`
       );
       if (confirmarEdicao) {
         setSelected(pessoa);
@@ -70,7 +70,7 @@ function App() {
       e.preventDefault();
       if (e.button === 2) {
         const confirmarDelecao = window.confirm(
-          `Clicou com o botão direito, e o ${pessoa.nome.toUpperCase()} será deletado`
+          `Clicou com o botão direito, e o ${pessoa.nome?.toUpperCase()} será deletado`
         );
         if (confirmarDelecao) {
           await apiDeletePessoa(index);
