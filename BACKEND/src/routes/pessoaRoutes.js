@@ -6,7 +6,7 @@ router.get('/',pessoaController.listarPessoas);
 router.get('/:id',pessoaController.buscarPessoaById);
 router.get('/busca',pessoaController.buscarPessoaByIDorSobrenome);
 router.post('/add',pessoaController.inserirPessoa)
-router.put('/:id',pessoaController.atualizarPessoa)
-router.delete('/:id',pessoaController.deletarPessoa)
+router.put('/atualizar/:id',pessoaController.atualizarPessoa)
+router.delete('/deletar/:id',pessoaController.deletarPessoa)
 
 module.exports = router;

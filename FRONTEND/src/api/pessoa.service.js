@@ -28,17 +28,16 @@ const apiAddPessoa = async (novaPessoa) => {
       throw new Error('Houve erro na adição do usuário')
     }
 
-    const result = await res.json();
-    return result;
+    return await res.json();
 
   } catch (error) {
     throw new Error(error.message)
   }
 };
 
-const apiUpdatePessoa = async (pessoaEdit) => {
+const apiUpdatePessoa = async (id, pessoaEdit) => {
   try {
-    const res = await fetch(`${URL_API}/pessoa/atualizar`, {
+    const res = await fetch(`${URL_API}/pessoa/atualizar/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -47,11 +46,9 @@ const apiUpdatePessoa = async (pessoaEdit) => {
     });
 
     if (!res.ok) {
-      throw new Error('Houve erro na atualização da pessoa')
+      throw new Error('Response not ok: ', res)
     }
-
-    const result = await res.json();
-    return result;
+    return await res.json();;
 
   } catch (error) {
     throw new Error(error.message)
@@ -76,12 +73,12 @@ const apiDeletePessoa = async (id) => {
   }
 }
 
-const apiGetPessoaById = async (id) =>{
+const apiGetPessoaById = async (id) => {
   try {
     const res = await fetch(`${URL_API}/pessoa/${id}`);
 
     if (!res.ok) {
-      throw new Error('Houve erro na atualização da pessoa')
+      throw new Error('Houve na busca da pessoa. Pessoa não identificada')
     }
 
     const result = await res.json();

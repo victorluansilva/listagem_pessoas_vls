@@ -10,9 +10,16 @@ import { useEffect, useState } from "react";
 import { apiGetPessoas, apiAddPessoa, apiGetPessoaById, apiUpdatePessoa, apiDeletePessoa } from "./api/pessoa.service";
 
 function App() {
+
+  const NULLPESSOA = { id: null, nome: null, sobrenome: null, idade: null }
+
   const [dados, setDados] = useState([{}]);
   const [onAction, setAction] = useState(false);
-  const [selected, setSelected] = useState({ id: null, nome: null, sobrenome: null, idade: null })
+  const [selected, setSelected] = useState(NULLPESSOA);
+
+  const resetSelected = () => {
+    setSelected(NULLPESSOA)
+  }
 
   useEffect(() => {
     fetchPessoas();
@@ -22,21 +29,31 @@ function App() {
     const resultado = await apiGetPessoas();
     setDados(resultado);
     setAction(false)
+    setSelected(NULLPESSOA)
   };
 
   const handleSubmit = async (novoDado) => {
     try {
-      const existingPerson = await apiGetPessoaById(novoDado.id);
-      if (existingPerson) {
-        await apiUpdatePessoa(novoDado.id, novoDado);
-        console.log('Pessoa atualizada com sucesso!');
+
+      const existingPerson = dados.find((e) => e.id === novoDado.id) //await apiGetPessoaById(novoDado.id);
+      let result;
+      if (!existingPerson) {
+        result = await apiAddPessoa(novoDado)
       } else {
-        await apiAddPessoa(novoDado);
-        console.log('Pessoa adicionada com sucesso!');
+        result = await apiUpdatePessoa(novoDado.id, novoDado)
       }
-      setAction(!onAction);
+      window.alert(
+        `${existingPerson ? novoDado.nome.toUpperCase() + ' foi atualizado' : novoDado.nome.toUpperCase() + ' foi adicionado'}`
+      );
+
+      if (result) {
+        setAction(!onAction);
+        return result;
+
+      }
     } catch (error) {
-      console.error('Erro ao adicionar ou atualizar pessoa:', error);
+      console.error('Erro na requisção:');
+      throw new Error(error.message);
     }
   }
 
@@ -65,7 +82,7 @@ function App() {
 
   return (
     <div className="App">
-      <FormPessoa selected={selected} handleSubmit={handleSubmit} />
+      <FormPessoa onSelected={selected} resetSelected={resetSelected} handleSubmit={handleSubmit} />
       <TablePessoa pessoas={dados} handleEdit={handleClick} />
     </div>
   );
