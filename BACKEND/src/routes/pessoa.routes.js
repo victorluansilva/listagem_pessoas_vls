@@ -9,3 +9,4 @@ router.put('/atualizar/:id',pessoaController.atualizarPessoa)
 router.delete('/deletar/:id',pessoaController.deletarPessoa)
 
 module.exports = router;
+

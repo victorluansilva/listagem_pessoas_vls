@@ -9,6 +9,7 @@ const FormPessoa = ({onSelected, handleSubmit, setSelected }) => {
   const [pessoa, setPessoa] = useState({});
   
   useEffect(() => {
+    resetSelected();
     setPessoa(onSelected);
   }, [onSelected]);
 

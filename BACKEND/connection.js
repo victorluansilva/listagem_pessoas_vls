@@ -14,4 +14,6 @@ const mySQLcon = {
   dataTypes: DataTypes,
 };
 
+// mySQLcon.config.sync({alter:true})
+
 module.exports = mySQLcon
