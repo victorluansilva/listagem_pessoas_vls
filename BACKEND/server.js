@@ -19,6 +19,6 @@ server.get('/',(req,res)=>{
 })
 
 server.listen(PORT, () => {
-  // console.log(process.env)
+  console.log(process.env)
   console.log(`Seu BACKEND está rodando na porta http://localhost:${PORT}`);
 });

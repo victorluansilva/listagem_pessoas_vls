@@ -1,15 +1,7 @@
 const pessoaService = require("../services/pessoa.services");
 
 const controllerPessoa = {
-  listarPessoas: (req, res) => {
-    try {
-      const pessoas = pessoaService.getPessoas();
-      res.json(pessoas);
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ statusCode: 500, error: "Error na tentativa de listar todos os registros no banco" });
-    }
-  },
+ 
   buscarPessoaById: async (req, res) => {
     try {
       const pessoa = await pessoaService.getById(req.params.id);
@@ -28,10 +20,10 @@ const controllerPessoa = {
   inserirPessoa: async (req, res) => {
     try {
       const novaPessoa = await pessoaService.createPessoa(req.body);
-      res.status(201).json(novaPessoa);
+      return res.status(201).json(novaPessoa);
     } catch (error) {
       console.log(error);
-      res.status(500).json({ statusCode: 500, error: "Erro na tentativa de inserir no registro no banco" });
+      return res.status(500).json({ statusCode: 500, error: "Erro na tentativa de inserir no registro no banco" });
     }
   },
   atualizarPessoa:async (req, res) => {
