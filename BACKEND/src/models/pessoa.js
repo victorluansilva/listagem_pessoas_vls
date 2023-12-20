@@ -22,7 +22,7 @@ const Pessoa = mySQLcon.config.define(
     },
   },
   {
-    freezeTableName: true,
+    // freezeTableName: true,
     timestamps: false,
     tableName: "pessoa",
   }

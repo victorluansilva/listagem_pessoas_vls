@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 
 const server = express();
 server.use(express.json());
@@ -19,5 +19,6 @@ server.get('/',(req,res)=>{
 })
 
 server.listen(PORT, () => {
+  // console.log(process.env)
   console.log(`Seu BACKEND está rodando na porta http://localhost:${PORT}`);
 });

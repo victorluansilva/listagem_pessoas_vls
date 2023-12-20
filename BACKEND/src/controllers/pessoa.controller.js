@@ -1,9 +1,9 @@
 const pessoaService = require("../services/pessoa.services");
 
 const controllerPessoa = {
-  listarPessoas: async (req, res) => {
+  listarPessoas: (req, res) => {
     try {
-      const pessoas = await pessoaService.getAll();
+      const pessoas = pessoaService.getPessoas();
       res.json(pessoas);
     } catch (error) {
       console.log(error);
@@ -12,7 +12,7 @@ const controllerPessoa = {
   },
   buscarPessoaById: async (req, res) => {
     try {
-      const pessoa = await pessoaService.findById(req.params.id);
+      const pessoa = await pessoaService.getById(req.params.id);
       if (!pessoa) {
         return res
           .status(404)
@@ -36,8 +36,7 @@ const controllerPessoa = {
   },
   atualizarPessoa:async (req, res) => {
     try {
-      const pessoaExistente = await pessoaService.findById(req.params.id);
-      console.log(pessoaExistente);
+      const pessoaExistente = await pessoaService.getById(req.params.id);
       if (!pessoaExistente) {
         return res
           .status(404)
@@ -53,7 +52,7 @@ const controllerPessoa = {
   },
   deletarPessoa: async (req, res) => {
     try {
-      const pessoaExistente = await pessoaService.findById(req.params.id);
+      const pessoaExistente = await pessoaService.getById(req.params.id);
       if (!pessoaExistente) {
         return res
           .status(404)
@@ -72,7 +71,6 @@ const controllerPessoa = {
     }
   }
 }
-
 
 module.exports = controllerPessoa;
 

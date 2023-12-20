@@ -9,7 +9,6 @@ const FormPessoa = ({onSelected, handleSubmit, setSelected }) => {
   const [pessoa, setPessoa] = useState({});
   
   useEffect(() => {
-    resetSelected();
     setPessoa(onSelected);
   }, [onSelected]);
 
@@ -25,7 +24,7 @@ const FormPessoa = ({onSelected, handleSubmit, setSelected }) => {
         id="inNome"
         label={onSelected.nome?onSelected.nome:"Nome"}
         variant="outlined"
-        defaultValue={onSelected.nome}
+        // defaultValue={onSelected.nome}
         onChange={(e) => {
           setPessoa({ ...pessoa, nome: e.target.value });
         }}
@@ -34,7 +33,7 @@ const FormPessoa = ({onSelected, handleSubmit, setSelected }) => {
         id="inSobrenome"
         label={onSelected.sobrenome?onSelected.sobrenome:"Sobrenome"}
         variant="outlined"
-        defaultValue={onSelected.sobrenome}
+        // defaultValue={onSelected.sobrenome}
         onChange={(e) => {
           setPessoa({ ...pessoa, sobrenome: e.target.value });
         }}
@@ -43,7 +42,7 @@ const FormPessoa = ({onSelected, handleSubmit, setSelected }) => {
         id="inIdade"
         label={onSelected.idade?onSelected.idade:"Idade"}
         variant="outlined"
-        defaultValue={onSelected.idade}
+        // defaultValue={onSelected.idade}
         onChange={(e) => {
           setPessoa({ ...pessoa, idade: e.target.value });
         }}

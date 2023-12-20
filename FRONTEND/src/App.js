@@ -33,10 +33,10 @@ function App() {
     try {
       const existingPerson = dados.find((e) => e.id === novoDado.id);
       let result;
-      if (!existingPerson) {
-        result = await apiAddPessoa(novoDado);
-      } else {
+      if (existingPerson) {
         result = await apiUpdatePessoa(novoDado.id, novoDado);
+      } else {
+        result = await apiAddPessoa(novoDado);
       }
       window.alert(
         `${

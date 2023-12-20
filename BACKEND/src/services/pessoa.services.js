@@ -1,32 +1,32 @@
 const Pessoa = require('../models/pessoa')
 const pessoaService = {
-  getAll: async () => {
+  getPessoas: async () => {
     return await Pessoa.findAll();
   },
 
-  findById: async (id) => {
+  getById: async (id) => {
     return await Pessoa.findByPk(id);
   },
 
-  createPessoa: async ({ nome, email }) => {
-    const novaPessoa = await Pessoa.create({ nome, email });
+  createPessoa: async ({ nome, sobrenome, idade }) => {
+    const novaPessoa = await Pessoa.create({ nome, sobrenome, idade });
     return novaPessoa;
   },
 
-  updatePessoa: async ({ id, nome, sobrenome, email }) => {
+  updatePessoa: async ({ id, nome, sobrenome, idade }) => {
     await Pessoa.update(
-      { nome, sobrenome, email },
+      { nome, sobrenome, idade },
       {
         where: {
           id: id,
         },
       }
     );
-    return { id, sobrenome, nome, email };
+    return { id, nome, sobrenome, idade };
   },
 
   deletePessoa: async (id) => {
-    await Pessoa.destroy({
+   return await Pessoa.destroy({
       where: { id: id },
     });
   }
