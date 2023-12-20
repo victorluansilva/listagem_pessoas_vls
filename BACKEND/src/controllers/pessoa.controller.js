@@ -1,7 +1,15 @@
 const pessoaService = require("../services/pessoa.services");
 
 const controllerPessoa = {
- 
+  listarPessoas: async (req, res) => {
+    try {
+      const pessoas = await pessoaService.getPessoas();
+      res.json(pessoas);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ statusCode: 500, error: "Error na tentativa de listar todos os registros no banco" });
+    }
+  },
   buscarPessoaById: async (req, res) => {
     try {
       const pessoa = await pessoaService.getById(req.params.id);
