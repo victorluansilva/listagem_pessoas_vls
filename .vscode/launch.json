@@ -1,6 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": "Attach by Process ID",
             "processId": "${command:PickProcess}",
@@ -11,9 +12,9 @@
             "type": "node"
         },
         {
+            "name": "FRONTEND",
             "type": "chrome",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
             "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}"
         },

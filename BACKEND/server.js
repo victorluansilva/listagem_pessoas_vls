@@ -10,7 +10,7 @@ server.use(cors());
 const pessoaRoutes = require("./src/routes/pessoa.routes");
 
 server.use("/api/pessoa", pessoaRoutes);
-// server.use("/api/record", recordRoutes);
+
 
 const PORT = process.env.PORT || 7000;
 
